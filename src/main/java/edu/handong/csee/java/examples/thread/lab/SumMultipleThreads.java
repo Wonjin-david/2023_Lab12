@@ -29,12 +29,23 @@ public class SumMultipleThreads {
 			thread.start();
 			threadsForSubSum.add(thread);
 			System.out.println("Thread-" + i + " started!");
+			
 		}
-
+		
+		try {
+			for(int i=0;i<threadsForSubSum.size();i++)
+				threadsForSubSum.get(i).join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		long grandTotal = 0;
 		for(SumRunner runner:sumRunners) {
 			grandTotal += runner.totalSum;
 		}
+		
+		
+		
 
 		System.out.println("Grand Total = " + grandTotal);
 	}
